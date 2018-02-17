@@ -1,0 +1,9 @@
+version: "2.3"
+
+services:
+    unlimited:
+        build: .
+    limited:
+        build: .
+        mem_limit: 20m
+        

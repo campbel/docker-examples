@@ -1,0 +1,19 @@
+version: "2.3"
+services:
+    docker-stats:
+        image: docker:17.12.0
+        command: docker events --format '{{json .}}'
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+        labels:
+            application: docker
+            service: events
+        logging:
+            driver: splunk
+            options:
+                splunk-url: $DEMO_SPLUNK_URL
+                splunk-token: $DEMO_SPLUNK_TOKEN
+                splunk-index: docker
+                splunk-format: json
+                splunk-insecureskipverify: "1"
+                labels: application,service
