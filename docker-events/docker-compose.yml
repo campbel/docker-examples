@@ -1,6 +1,6 @@
 version: "2.3"
 services:
-    docker-stats:
+    docker-events:
         image: docker:17.12.0
         command: docker events --format '{{json .}}'
         volumes:
@@ -13,7 +13,7 @@ services:
             options:
                 splunk-url: $DEMO_SPLUNK_URL
                 splunk-token: $DEMO_SPLUNK_TOKEN
-                splunk-index: docker
+                splunk-index: $DEMO_SPLUNK_INDEX
                 splunk-format: json
-                splunk-insecureskipverify: "1"
+                splunk-insecureskipverify: "1"    # required if using free tier splunk
                 labels: application,service

@@ -1,7 +1,7 @@
 version: "2.3"
 services:
     docker-stats:
-        build: .
+        image: campbel/docker-stats:latest
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
         labels:
@@ -12,7 +12,7 @@ services:
             options:
                 splunk-url: $DEMO_SPLUNK_URL
                 splunk-token: $DEMO_SPLUNK_TOKEN
-                splunk-index: docker
+                splunk-index: $DEMO_SPLUNK_INDEX
                 splunk-format: json
                 splunk-insecureskipverify: "1"
                 labels: application,service
