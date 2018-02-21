@@ -22,6 +22,7 @@ func main() {
 		Handler: mux,
 	}
 
+	// Listen for SIGTERM and shutdown the server.
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGTERM)
 	go func() {
@@ -29,6 +30,7 @@ func main() {
 		server.Shutdown(context.Background())
 	}()
 
+	// Start the server
 	if err := server.ListenAndServe(); err != nil {
 		fmt.Println(err)
 	}
