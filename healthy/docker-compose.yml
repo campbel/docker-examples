@@ -1,0 +1,11 @@
+version: "2.3"
+services:
+    healthy:
+        image: campbel/healthy:latest
+        build: .
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost/health"]
+            interval: 5s
+            timeout: 5s
+            start_period: 10s
+            retries: 3

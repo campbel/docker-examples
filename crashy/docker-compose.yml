@@ -1,0 +1,6 @@
+version: "2.3"
+services:
+    crashy:
+        image: campbel/crashy:latest
+        build: .
+        restart: always
