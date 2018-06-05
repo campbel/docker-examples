@@ -1,0 +1,13 @@
+version: "2.3"
+services:
+    leaky:
+        image: campbel/leaky:latest
+        build: .
+        restart: always
+
+        # https://docs.docker.com/config/containers/resource_constraints/#limit-a-containers-access-to-memory
+        mem_limit: 10m
+        memswap_limit: 10m
+        # mem_reservation: 5m
+        # oom_score_adj: 500
+        # oom_kill_disable: true

@@ -1,0 +1,17 @@
+version: "2.3"
+services:
+    busy1:
+        image: campbel/busy:latest
+        build: .
+
+        # https://docs.docker.com/config/containers/resource_constraints/#cpu
+        cpus: 0.5  # shorthand for cpu_period, cpu_quota 
+        # cpu_count: 2
+        # cpu_percent: 50
+        # cpu_shares: 73
+        # cpu_quota: 50000
+        # cpu_period: 20ms
+        # cpuset: 0,1
+    busy2:
+        image: campbel/busy:latest
+        cpus: 1.0
