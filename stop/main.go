@@ -1,12 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"os"
-	"os/signal"
-	"syscall"
 )
 
 func main() {
@@ -21,16 +18,22 @@ func main() {
 	}
 
 	// Listen for SIGTERM and shutdown the server.
-	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGTERM)
-	go func() {
-		<-sigs // this blocks until SIGTERM is sent
-		fmt.Println("shutting down...")
-		server.Shutdown(context.Background())
-	}()
+	done := make(chan bool)
+	// sigs := make(chan os.Signal, 1)
+	// signal.Notify(sigs, syscall.SIGTERM)
+	// go func() {
+	// 	<-sigs // this blocks until SIGTERM is sent
+	// 	fmt.Println("shutting down...")
+	// 	server.Shutdown(context.Background())
+	// 	done <- true
+	// }()
 
 	// Start the server
-	if err := server.ListenAndServe(); err != nil {
+	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		fmt.Println(err)
+		os.Exit(1)
 	}
+
+	<-done
+	fmt.Println("shutdown")
 }

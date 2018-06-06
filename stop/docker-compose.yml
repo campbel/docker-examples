@@ -2,5 +2,5 @@ version: "2.3"
 services:
     stop:
         image: campbel/stop:latest
-        command: ["app"]
         build: .
+        # command: ["app"]
